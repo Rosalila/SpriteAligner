@@ -93,12 +93,14 @@ public class ImagePanel extends JPanel{
         repaint();
     }
     
-    void setImage(String path,int x,int y)
+    void setImage(String path,int x,int y,double scale)
     {
         try {
           original_image = ImageIO.read(new File(path));
           this.x=x;
           this.y=y;
+          this.scale=scale;
+          this.myScale();
 //          this.setPreferredSize(new Dimension(original_image.getWidth()+Math.abs(x)*2, original_image.getHeight()+Math.abs(y)*2));
 //          int size_x_parrent=this.getX()+this.getPreferredSize().width;
 //          int size_y_parrent = this.getY()+this.getPreferredSize().height;

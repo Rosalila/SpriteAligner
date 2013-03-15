@@ -561,7 +561,13 @@ private void list_framesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST
                     if( frame_number.equals((String)list_frames.getSelectedValue()) )
                     {
                         current_sprite=(Element) frame;
-                        updateSprites(current_sprite);
+                        
+                        int align_x=Integer.parseInt( current_sprite.getAttribute("align_x") );
+                        int align_y=Integer.parseInt( current_sprite.getAttribute("align_y") );
+                        
+                        spinner_x.setValue(align_x);
+                        spinner_y.setValue(align_y);
+                        //updateSprites(current_sprite);
                         frame_found=true;
                     }
                 }
@@ -572,10 +578,13 @@ private void list_framesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_list_framesMousePressed
 
 void updateSprites(Element frame)
-{ 
-    frame.setAttribute("align_x", ""+spinner_x.getValue());
-    frame.setAttribute("align_y", ""+spinner_y.getValue());    
-    saveSprite();
+{
+    if(frame!=null)
+    {
+        frame.setAttribute("align_x", ""+spinner_x.getValue());
+        frame.setAttribute("align_y", ""+spinner_y.getValue());    
+        saveSprite();
+    }
 }
 
 void saveSprite()
@@ -617,10 +626,13 @@ void printSprite()
                     {
                         sprite_found=true;
                         String sprite_path="/"+((Element)sprite).getAttribute("path");
+                        
                         int align_x=Integer.parseInt(((Element)sprite).getAttribute("align_x"));
                         int align_y=Integer.parseInt(((Element)sprite).getAttribute("align_y"));
+
+                        double scale=(double)Integer.parseInt(((Element)sprite).getAttribute("scale"));
                         //Print sprite
-                        ((ImagePanel)image_panel).setImage(directory_path+sprite_path,align_x,align_y);
+                        ((ImagePanel)image_panel).setImage(directory_path+sprite_path,align_x,align_y,scale);
                         label_current_sprite.setText(sprite_path);
                     }
                 }
