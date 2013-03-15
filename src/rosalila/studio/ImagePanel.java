@@ -25,8 +25,12 @@ public class ImagePanel extends JPanel{
     public BufferedImage original_image;
     public BufferedImage scaled_image;
     public BufferedImage axis;
+    public BufferedImage filter;
+    public BufferedImage bg_image;
     public int x;
     public int y;
+    public int x_bg;
+    public int y_bg;
     int axis_x,axis_y;
     public double scale;
     Graphics g;
@@ -36,10 +40,14 @@ public class ImagePanel extends JPanel{
         y=0;
         axis_x=0;
         axis_y=0;
+        x_bg=0;
+        y_bg=0;
         scale=1;
        try {
           original_image = ImageIO.read(new File("assets/LogoEngine.png"));
+          bg_image = null;
           axis = ImageIO.read(new File("assets/Axis.png"));
+          filter = ImageIO.read(new File("assets/TransparentRectangle.png"));
        } catch (IOException ex) {
             // handle exception...
        }
@@ -50,6 +58,11 @@ public class ImagePanel extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         myScale();
+
+        if(bg_image!=null)
+            g.drawImage(bg_image, x_bg,y_bg, null);
+        
+        g.drawImage(filter, 0,0, null);
         
         int pos_x=this.getWidth()/2-scaled_image.getWidth()/2+x;
         int pos_y=this.getHeight()-scaled_image.getHeight()-y;
@@ -99,5 +112,12 @@ public class ImagePanel extends JPanel{
             // handle exception...
         }
         repaint();
+    }
+    
+    void setCurrentAsBackground()
+    {
+        this.bg_image=scaled_image;
+        this.x_bg=this.getWidth()/2-scaled_image.getWidth()/2+x;
+        this.y_bg=this.getHeight()-scaled_image.getHeight()-y;
     }
 }

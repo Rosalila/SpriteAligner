@@ -212,6 +212,7 @@ public class fightermakerView extends FrameView implements TreeSelectionListener
         spinner_x = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         spinner_y = new javax.swing.JSpinner();
+        button_set_bg_image = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -311,6 +312,19 @@ public class fightermakerView extends FrameView implements TreeSelectionListener
         jLabel3.setName("jLabel3"); // NOI18N
 
         spinner_y.setName("spinner_y"); // NOI18N
+        spinner_y.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinner_yStateChanged(evt);
+            }
+        });
+
+        button_set_bg_image.setText(resourceMap.getString("button_set_bg_image.text")); // NOI18N
+        button_set_bg_image.setName("button_set_bg_image"); // NOI18N
+        button_set_bg_image.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                button_set_bg_imageMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -335,7 +349,8 @@ public class fightermakerView extends FrameView implements TreeSelectionListener
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spinner_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(spinner_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(button_set_bg_image))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(image_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(403, Short.MAX_VALUE))
@@ -359,7 +374,9 @@ public class fightermakerView extends FrameView implements TreeSelectionListener
                     .addComponent(spinner_x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(spinner_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(393, 393, 393)
+                .addGap(18, 18, 18)
+                .addComponent(button_set_bg_image)
+                .addGap(350, 350, 350)
                 .addComponent(label_current_sprite)
                 .addContainerGap(130, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -646,8 +663,7 @@ private void image_panelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
 }//GEN-LAST:event_image_panelMouseMoved
 
 private void image_panelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_image_panelMousePressed
-    click_target_flag=true;
-    
+    ((ImagePanel)image_panel).setCurrentAsBackground();
 }//GEN-LAST:event_image_panelMousePressed
 
 private void spinner_xStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinner_xStateChanged
@@ -655,7 +671,17 @@ private void spinner_xStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIR
     printSprite();
 }//GEN-LAST:event_spinner_xStateChanged
 
+private void button_set_bg_imageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_set_bg_imageMousePressed
+    ((ImagePanel)image_panel).setCurrentAsBackground();
+}//GEN-LAST:event_button_set_bg_imageMousePressed
+
+private void spinner_yStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinner_yStateChanged
+    updateSprites(current_sprite);
+    printSprite();
+}//GEN-LAST:event_spinner_yStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_set_bg_image;
     private javax.swing.JPanel image_panel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
